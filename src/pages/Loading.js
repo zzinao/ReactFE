@@ -31,7 +31,10 @@ function Loading() {
   const entrance = () => {
     accessSF.play()
     history.push('/gamemain')
-    const socket = io.connect('https://sparta-dongsun.shop')
+    const socket = io('ws://www.nhseung.shop:5000', {
+      transports: ['websocket'],
+      jsonp: false,
+    })
     dispatch(gameActions.sendSocket(socket))
     socket.emit('roomList')
     socket.on('roomList', (rooms) => {
